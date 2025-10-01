@@ -71,7 +71,7 @@ pip install -r requirements_train.txt
 python main.py
 ```
 
-### 8. Volte para a pasta raiz e inicie o frontend
+### 7. Volte para a pasta raiz e inicie o frontend
 ```bash
 cd ..
 npm run dev
@@ -118,3 +118,5 @@ Backend em Flask com gunicorn
 Frontend em React (static site)
 
 Redirecionamento de /api/* → backend
+
+Link: https://automacao-emails-s397.onrender.com/
