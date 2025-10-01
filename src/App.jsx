@@ -26,6 +26,8 @@ function App() {
       const formData = new FormData();
       files.forEach(f => formData.append('files', f)); // chave esperada pelo Flask
 
+      try { await fetch(`${API_BASE}/warm`, { method: 'GET' }); } catch {}
+
       const resp = await fetch(`${API_BASE}/processar`, {
         method: 'POST',
         body: formData, // NÃO defina Content-Type manualmente
