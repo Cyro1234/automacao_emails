@@ -11,8 +11,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(false) // estado de carregamento
   const [error, setError] = useState(null)
 
-  const API_BASE = import.meta.env.DEV ? 'http://localhost:8000' : '/api'; // porta 8000 para rodar localmente, /api para quando for deploy
-
+  // const API_BASE = import.meta.env.DEV ? 'http://localhost:8000' : '/api'; // porta 8000 para rodar localmente, /api para quando for deploy
+  const API_BASE = import.meta.env.DEV
+    ? 'http://localhost:8000'
+    : 'https://automacao-emails-back.onrender.com';
   const handleUpload = async () => {
     if (files.length === 0 || isLoading) return;
 
