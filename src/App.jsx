@@ -14,42 +14,46 @@ function App() {
   const API_BASE = import.meta.env.DEV ? 'http://localhost:8000' : '/api'; // porta 8000 para rodar localmente, /api para quando for deploy
 
   const handleUpload = async () => {
-  if (files.length === 0 || isLoading) return
-  setError(null)
-  setIsLoading(true)
-  setResultados([])
+    if (files.length === 0 || isLoading) return;
 
-  try {
-    const formData = new FormData()
-    files.forEach(file => formData.append('files', file)) // chave esperada no Flask
+    setError(null);
+    setIsLoading(true);
+    setResultados([]);
 
-    const resp = await fetch(`${API_BASE}/processar`, {
-      method: 'POST',
-      body: formData,
-    })
-
-    // Leia como texto primeiro (quando dá erro o servidor pode mandar HTML ou corpo vazio)
-    const raw = await resp.text()
-
-    if (!resp.ok) {
-      throw new Error(`HTTP ${resp.status} – ${raw?.slice(0, 400) || 'sem corpo'}`)
-    }
-
-    let data
     try {
-      data = raw ? JSON.parse(raw) : null
-    } catch (e) {
-      throw new Error(`Resposta não-JSON do servidor: ${raw?.slice(0, 400) || 'vazia'}`)
-    }
+      const formData = new FormData();
+      files.forEach(f => formData.append('files', f)); // chave esperada pelo Flask
 
-    setResultados(Array.isArray(data?.resultados) ? data.resultados : [])
-  } catch (e) {
-    console.error(e)
-    setError(String(e))
-  } finally {
-    setIsLoading(false)
-  }
-}
+      const resp = await fetch(`${API_BASE}/processar`, {
+        method: 'POST',
+        body: formData, // NÃO defina Content-Type manualmente
+      });
+
+      const raw = await resp.text(); // pode vir HTML/erro vazio
+
+      // log útil no DevTools → Network
+      console.log('PROCESSAR status:', resp.status, 'body:', raw?.slice(0, 300));
+
+      if (!resp.ok) {
+        throw new Error(`HTTP ${resp.status} – ${raw?.slice(0, 400) || 'sem corpo'}`);
+      }
+
+      let data = null;
+      try {
+        data = raw ? JSON.parse(raw) : null;
+      } catch (e) {
+        throw new Error(`Resposta não-JSON do servidor: ${raw?.slice(0, 400) || 'vazia'}`);
+      }
+
+      setResultados(Array.isArray(data?.resultados) ? data.resultados : []);
+    } catch (e) {
+      console.error('Falha ao processar:', e);
+      setError(String(e));       // <<< isso aparece na UI
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
 
   return (
     <div>
@@ -62,7 +66,14 @@ function App() {
           disabled={isLoading}
           isLoading={isLoading}
         />
+
       )}
+      {error && (
+        <p className="erro" style={{ color: '#ff4d4f', marginTop: 10 }}>
+          {error}
+        </p>
+      )}
+
 
       {isLoading && <Load />}
 
