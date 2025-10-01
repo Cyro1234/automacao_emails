@@ -13,8 +13,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # caminho absoluto da pas
 UPLOAD_DIR = os.path.join(BASE_DIR, "emails") # da upload dos arquivos a pasta emails para o processamento dos dados depois
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-classifier = pipeline("text-classification", model="./meu_modelo", tokenizer="./meu_modelo") # classificador baseado no meu modelo gerado
-tokenizer = AutoTokenizer.from_pretrained("./meu_modelo")
+classifier = pipeline("text-classification", model="lilsiru/classificador-emails-ptbr", tokenizer="lilsiru/classificador-emails-ptbr") # classificador baseado no meu modelo gerado e colocado no hugging face, caso queira ver como foi gerado acesse a pasta treino_opcional
+tokenizer = AutoTokenizer.from_pretrained("lilsiru/classificador-emails-ptbr")
 
 QA_MODEL = os.getenv("QA_MODEL", "pierreguillou/bert-base-cased-squad-v1.1-portuguese") # garante que o modelo usado seja pt-BR
 _qa_pipe = None
