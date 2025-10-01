@@ -1,16 +1,120 @@
-# React + Vite
+# 📧 Automação de E-mails com IA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto fullstack (React + Flask) que realiza **classificação de e-mails em Português** e gera respostas automáticas utilizando **modelos pré-treinados de NLP (Hugging Face Transformers)**.  
 
-Currently, two official plugins are available:
+O objetivo é auxiliar equipes de suporte a **identificar rapidamente mensagens produtivas e improdutivas** e responder de forma eficiente.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ⚙️ Tecnologias Utilizadas
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend:** React + Vite + Tailwind
+- **Backend:** Python + Flask + Flask-CORS
+- **IA / NLP:** Hugging Face Transformers
+- **Gerenciador de Pacotes:** npm / pip
+- **Ambiente Virtual:** venv (Python)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📋 Pré-requisitos
+
+Antes de começar, certifique-se de ter instalado:
+
+- [Python 3.10+](https://www.python.org/downloads/)
+- [Node.js 18+](https://nodejs.org/en/download/)
+
+---
+
+## 🚀 Instruções de Instalação
+
+### 1. Clone o repositório
+```bash
+git clone https://github.com/Cyro1234/automacao_emails.git
+```
+
+### 2. Acesse a pasta do projeto
+```bash
+cd seu-repositorio
+```
+
+### 3. Instale as dependências do frontend
+```bash
+npm install
+```
+
+### 4. Configure o ambiente virtual do Python (recomendado)
+
+#### Linux / Mac
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate
+```
+#### Windows
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 5. Instale as dependências do backend
+```bash
+pip install -r requirements_py.txt
+```
+### 5.1. (Opcional) Dependências para treino do modelo
+```bash
+pip install -r requirements_train.txt
+```
+
+### 6. Inicie o backend (Flask)
+```bash
+python main.py
+```
+
+### 8. Volte para a pasta raiz e inicie o frontend
+```bash
+cd ..
+npm run dev
+```
+O frontend estará rodando em:
+👉 http://localhost:5173
+
+E o backend em:
+👉 http://localhost:8000
+
+---
+
+## 🚀 (Opcional) Instruções de treinamento
+Caso queira ver como o modelo Hugging Face foi criado (OBS.: Esse passo requer instalação das dependências do arquivo requirementes_train.txt):
+
+### 1. Configure o ambiente virtual do Python, caso tenha fechado (recomendado)
+
+#### Linux / Mac
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate
+```
+#### Windows
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 2. Inicie o arquivo de treinamento
+```bash
+python train_classifier.py
+```
+
+---
+
+## 🌐 Deploy
+
+Este projeto foi configurado para deploy na plataforma Render:
+
+Backend em Flask com gunicorn
+
+Frontend em React (static site)
+
+Redirecionamento de /api/* → backend
