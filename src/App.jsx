@@ -11,6 +11,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false) // estado de carregamento
   const [error, setError] = useState(null)
 
+  const API_BASE = import.meta.env.DEV ? 'http://localhost:8000' : '/api'; // porta 8000 para rodar localmente, /api para quando for deploy
+
   const handleUpload = async () => {
     if (files.length === 0 || isLoading) return
     setError(null)
@@ -21,10 +23,10 @@ function App() {
       const formData = new FormData()
       files.forEach(file => formData.append('files', file))
 
-      const resp = await fetch('http://localhost:8000/processar', { // ajustar a porta para 8000, envia o conteudo para o endpoint correto
+      const resp = await fetch(`${API_BASE}/processar`, {
         method: 'POST',
-        body: formData
-      })
+        body: formData,
+      });
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
       const data = await resp.json()
       setResultados(data.resultados || [])
