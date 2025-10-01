@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+.drag {
+    width: 600px;
+    height: 300px;
+}
+
+.drop-scroll::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+
+.drop-scroll::-webkit-scrollbar-thumb {
+  background: #a5b4fc;
+  border-radius: 4px;
+}
+
+.drop-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}

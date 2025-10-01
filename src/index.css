@@ -1,0 +1,27 @@
+/* @import "tailwindcss"; */
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+}
+
+input::placeholder {
+  color: #505050; /* Sets the placeholder color to red */
+}
+
+input {
+  color: black;
+}
+
+input:focus {
+  outline: none;
+  border-color: #d492ff; /* Sets the border color to red when focused */
+  box-shadow: 0 0 10px #d492ff; /* Optional: adds a red glow effect */
+}
